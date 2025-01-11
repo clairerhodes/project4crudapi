@@ -10,7 +10,12 @@ class blogPostList(generics.ListCreateAPIView):
     queryset = blogPost.objects.all().order_by('id') # retrieve all objects from DB and order by ascending ID
     serializer_class = blogPostSerializer
 
-# /blogPost/:id (read, update, or delete specific ID)
-class blogPostDetail(generics.RetrieveDestroyAPIView):
+# # /blogPost/:id (read, update, or delete specific ID) DOES NOT SUPPORT PUT REQUEST
+# class blogPostDetail(generics.RetrieveDestroyAPIView):
+#     queryset = blogPost.objects.all().order_by('id')
+#     serializer_class = blogPostSerializer
+
+
+class blogPostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = blogPost.objects.all().order_by('id')
     serializer_class = blogPostSerializer
