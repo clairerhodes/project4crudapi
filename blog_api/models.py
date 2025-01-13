@@ -10,3 +10,7 @@ class blogPost(models.Model):
     description = models.CharField(max_length = 1024)
     userID = models.IntegerField()
     comments = models.JSONField(null = True, blank = True)
+
+class User(models.Model):
+    # userId = models.IntegerField()
+    username = models.CharField(max_length=64)
