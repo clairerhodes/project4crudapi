@@ -1,4 +1,4 @@
-import Navbar from '../nav/Navbar.jsx';
+// import Navbar from '../nav/Navbar.jsx';
 import { useEffect, useState} from 'react';
 
 const Home = ({content = [], setContent}) => {
@@ -29,7 +29,6 @@ const Home = ({content = [], setContent}) => {
             <div>
                 {/* div for logo, navbar, user profile */}
                 {/* <img src=""> logo */}
-                <Navbar />
                 {/* user profile - picture, name, and username */}
             </div>
             <div>
@@ -48,7 +47,7 @@ const Home = ({content = [], setContent}) => {
                                 <p>{post.comments}</p>
                             </li>
                         </div>
-                    })};
+                    })}
                 </ul>
                 {/* <Footer /> */}
             </div>

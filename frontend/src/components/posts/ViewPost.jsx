@@ -3,7 +3,10 @@ import {useState, useEffect} from "react";
 
 const ViewPost = (props, {handleSection}) => {
 
-    const BASE_URL = 'http:/localhost:8000/api/blogpost'
+    const BASE_URL = `${import.meta.env.BASE_URL}`
+    console.log('this is the base url');    
+    console.log(BASE_URL);
+    
 
     const [post, setPost] = useState({
         subjectLine: "",

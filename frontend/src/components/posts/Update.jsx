@@ -1,13 +1,15 @@
 
 import {useState, useEffect} from "react";
 
-const Update = ({contentId}) => {
+const Update = ({contentId, setPage}) => {
 
     const [content, setContent] = useState(null);
 
     //const BASE_URL = 'http://3.90.140.106:8000/api/blogPost/' //swap out with test
     //let API_URL =(`${BASE_URL}/${contentId}`) 
-    let API_URL = 'http://3.90.140.106:8000/api/blogPost/3'
+    // let API_URL = 'http://3.90.140.106:8000/api/blogPost/3'
+    let API_URL = `${import.meta.env.BASE_URL}/3`
+
 
     const userId = 1 //demonstration, not used currently
     //In theory unnecessary since we will only be allowing users to get to this page if they own the post,
@@ -56,6 +58,7 @@ const Update = ({contentId}) => {
                 let updatedContent = await res.json(); 
                 console.log('Content update successful:', updatedContent);
                 setContent(updatedContent) //update useState with updated Content data                
+                setPage('viewPost')//view the post after we have updated it.
             } else { //handle if res is bad.
                 console.error('Failed to update post:', res.statusText);                
             }
@@ -77,6 +80,7 @@ const Update = ({contentId}) => {
                 console.log('Post deleted successfully');
                 //redirect user using setPage?
                 setContent(null); //hide form for now.  Won't matter once we are redirecting.                
+                setPage('home') //go home after deleting, possibly to profile?
             } else {
                 console.error('Failed to delete: ', res.statusText);                
             }            
