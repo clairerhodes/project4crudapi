@@ -62,7 +62,7 @@ const EditPost = ({contentId, setPage, setContentId}) => {
                 console.log('Content update successful:', updatedContent);
                 setContent(updatedContent) //update useState with updated Content data    
                 setContentId(updatedContent.id)            
-                setPage('viewPost')//view the post after we have updated it.
+                setPage('ViewPost')//view the post after we have updated it.
             } else { //handle if res is bad.
                 console.error('Failed to update post:', res.statusText);                
             }
