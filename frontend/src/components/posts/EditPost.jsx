@@ -1,4 +1,3 @@
-
 import {useState, useEffect} from "react";
 
 const Update = ({contentId, setPage}) => {
@@ -176,8 +175,3 @@ export default Update;
     //     jobLink: JSONdata?.jobLink || '',
     //     description: JSONdata?.description || '',
     // });
-
-
-
-
-
