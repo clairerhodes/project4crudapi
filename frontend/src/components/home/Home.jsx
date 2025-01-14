@@ -45,7 +45,7 @@ const Home = ({content = [], setContent, setContentId, setPage}) => {
                         {content.map((post, index) => (
                             <div className="postContainer" key={index}>
                                 <li>
-                                    <h1 onClick={ () => handleShow(post.id)}>{post.subjectLine}</h1>
+                                    <h1 className="subjectLine" onClick={ () => handleShow(post.id)}>{post.subjectLine}</h1>
                                     <h6>By {post.userID}</h6>
                                     <h2>{post.jobTitle} at {post.companyName}</h2>
                                     <h4>Job link: {post.jobLink}</h4>
