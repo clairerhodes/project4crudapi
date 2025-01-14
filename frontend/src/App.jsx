@@ -16,6 +16,13 @@ const App = () => {
   const [content, setContent] = useState([]);
   const [user, setUser] = useState(1);
   const [contentId, setContentId] = useState(null);
+  // const [mode, setMode] = useState('dark')
+  
+  // //function to update mode
+  // const handleMode = (modeValue) => {
+  //   console.log(modeValue)
+  //   setMode(modeValue)
+  // }
   
   // function to update page state
   const handleSection = (event) => {
@@ -24,22 +31,30 @@ const App = () => {
 
   return (
     <>
-      <Navbar handleSection={handleSection} />
-      {/* default show home page */}
-        {page === 'Home' ? <Home content={content} setContent={setContent} setContentId={setContentId} setPage={setPage}/> : ''}
-        {/* {page === 'Home' ? <Home/> : ''} */}
-      {/* user profile section */}
-        {/* do we also want to have page that shows a list of users to click? or just ability to click on a user through their post */}
-        {page === "ViewProfile" ? <Profile user={user} setContent={setContent}/> : ''}
-      {/* post section */}
-        {page === "Create" ? <Create user={user} setPage={setPage}/> : ''}
-        {page === "ViewPost" ? <ViewPost contentId={contentId} setPage={setPage} setContentId={setContentId}/> : ''}
-        {page === "EditPost" ? <EditPost contentId={contentId} setPage={setPage} setContentId={setContentId}/> : ''}
-        
-      {/* authentication section */}
-        {/* {page === "login" ? <LogIn user={user} setUser={setUser}/> : ''} */}
-        {/* {page === "signup" ? <SignUp setUser={setUser} /> : ''} */}
-        {/* <Footer /> */}
+      <div>
+        <Navbar handleSection={handleSection} />
+        {/* default show home page */}
+          {page === 'Home' ? <Home content={content} setContent={setContent} setContentId={setContentId} setPage={setPage}/> : ''}
+          {/* {page === 'Home' ? <Home/> : ''} */}
+        {/* user profile section */}
+          {/* do we also want to have page that shows a list of users to click? or just ability to click on a user through their post */}
+          {page === "ViewProfile" ? <Profile user={user} setContent={setContent}/> : ''}
+        {/* post section */}
+          {page === "Create" ? <Create user={user} setPage={setPage}/> : ''}
+          {page === "ViewPost" ? <ViewPost contentId={contentId} setPage={setPage} setContentId={setContentId}/> : ''}
+          {page === "EditPost" ? <EditPost contentId={contentId} setPage={setPage} setContentId={setContentId}/> : ''}
+          
+        {/* authentication section */}
+          {/* {page === "login" ? <LogIn user={user} setUser={setUser}/> : ''} */}
+          {/* {page === "signup" ? <SignUp setUser={setUser} /> : ''} */}
+          {/* <Footer /> */}
+      </div>
+      {/* <div>
+          <button onClick={() => handleMode("light")}>Light Mode</button>
+          <button onClick={() => handleMode("dark")}>Dark Mode</button>
+          <button onClick={() => handleMode("neon")}>Neon Mode</button>
+          <button onClick={() => handleMode("night")}>Night Mode</button>        
+      </div> */}
     </>
   );
 };
