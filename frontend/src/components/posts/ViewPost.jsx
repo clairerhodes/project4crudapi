@@ -1,8 +1,9 @@
 import {useState, useEffect} from "react";
 
-const ViewPost = (props, {handleSection}) => {
+const ViewPost = ({contentId, setPage, setContentId}) => {
 
-    const BASE_URL = `${import.meta.env.BASE_URL}`
+    // const BASE_URL = `${import.meta.env.BASE_URL}`
+    const BASE_URL = 'http://3.90.140.106:8000/api/blogPost'
     console.log('this is the base url');    
     console.log(BASE_URL);
     
@@ -21,7 +22,8 @@ const ViewPost = (props, {handleSection}) => {
     useEffect(() => {
         const getPostData = async () => {
             try {
-                const res = await fetch(BASE_URL);
+                // const res = await fetch(BASE_URL);
+                const res = await fetch(`${BASE_URL}/${contentId}`)
                 let JSONdata = await res.json();
                 setPost(JSONdata);
             } catch (err) {
@@ -31,23 +33,32 @@ const ViewPost = (props, {handleSection}) => {
         getPostData();
     }, []);
 
+    const handleEdit = (id => {
+        setContentId(id) //grabs content 'id'
+        setPage('EditPost')
+    })
+
+    const goHome = (e => {
+        setPage(e)
+    })
+
     return (
         <>
             <div>
                 <li>
-                    <h1>{props.content.subjectLine}</h1>
-                    <h6>By {props.content.userID}</h6>
-                    <h2>{props.content.jobTitle} at {post.companyName}</h2>
-                    <h4>Job link: {props.content.jobLink}</h4>
-                    <h4>Job status: {props.content.jobLink}</h4>
-                    <p>{props.content.description}</p>
-                    <p>{props.content.comments}</p>
+                    <h1>{post.subjectLine}</h1>
+                    <h6>By {post.userID}</h6>
+                    <h2>{post.jobTitle} at {post.companyName}</h2>
+                    <h4>Job link: {post.jobLink}</h4>
+                    <h4>Job status: {post.status}</h4>
+                    <p>{post.description}</p>
+                    <p>{post.comments}</p>
                 </li>
             </div>
             <div>
             {/* add buttons */}
-                <button onClick={handleSection} value="update">Edit</button>
-                <button onClick={handleSection} value="home">Back Home</button>
+                <button onClick={ () => handleEdit(post.id)} value="EditPost">Edit</button>
+                <button onClick={ () => goHome("Home")}  value="Home">Back Home</button>
             </div>
         </>
     )

@@ -1,13 +1,16 @@
 import {useState, useEffect} from "react";
 
-const EditPost = ({contentId, setPage}) => {
+const EditPost = ({contentId, setPage, setContentId}) => {
 
     const [content, setContent] = useState(null);
 
     //const BASE_URL = 'http://3.90.140.106:8000/api/blogPost/' //swap out with test
     //let API_URL =(`${BASE_URL}/${contentId}`) 
     // let API_URL = 'http://3.90.140.106:8000/api/blogPost/3'
-    let API_URL = `${import.meta.env.BASE_URL}/3`
+    // let API_URL = `${import.meta.env.BASE_URL}/3`
+    const BASE_URL = 'http://3.90.140.106:8000/api/blogPost'
+    console.log('this is the base url');    
+    console.log(BASE_URL);
 
 
     const userId = 1 //demonstration, not used currently
@@ -17,7 +20,7 @@ const EditPost = ({contentId, setPage}) => {
     useEffect(() => { //Gets original post data
         const fetchContent = async () => {
             try {
-                let res = await fetch(API_URL); //fetch post data
+                let res = await fetch(`${BASE_URL}/${contentId}`); //fetch post data
                 //let res = await fetch(`${API_URL}/${contentId}`) //swap out with test  //Dont need this because we are just going to set API_URL for the post above.
                 let JSONdata = await res.json(); //parse as JSONdata
                 console.log('JSON Data below');
@@ -45,7 +48,8 @@ const EditPost = ({contentId, setPage}) => {
         e.preventDefault(); //this stops the form from loading the initialPost every
                             //time the user inputs anything.
         try {
-            let res = await fetch(API_URL, { //Update on Submit
+            fetch(`${BASE_URL}/${contentId}`)
+            let res = await fetch(`${BASE_URL}/${contentId}`, { //Update on Submit
                 method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +60,8 @@ const EditPost = ({contentId, setPage}) => {
             if (res.ok) {
                 let updatedContent = await res.json(); 
                 console.log('Content update successful:', updatedContent);
-                setContent(updatedContent) //update useState with updated Content data                
+                setContent(updatedContent) //update useState with updated Content data    
+                setContentId(updatedContent.id)            
                 setPage('viewPost')//view the post after we have updated it.
             } else { //handle if res is bad.
                 console.error('Failed to update post:', res.statusText);                
@@ -68,7 +73,7 @@ const EditPost = ({contentId, setPage}) => {
 
     const handleDelete = async () => {
         try {
-            let res = await fetch(API_URL, {
+            let res = await fetch(`${BASE_URL}/${contentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +84,7 @@ const EditPost = ({contentId, setPage}) => {
                 console.log('Post deleted successfully');
                 //redirect user using setPage?
                 setContent(null); //hide form for now.  Won't matter once we are redirecting.                
-                setPage('home') //go home after deleting, possibly to profile?
+                setPage('Home') //go home after deleting, possibly to profile?
             } else {
                 console.error('Failed to delete: ', res.statusText);                
             }            
