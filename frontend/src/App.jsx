@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Home from './components/home/Home.jsx';
 import Navbar from './components/nav/Navbar.jsx';
-// import Footer from './components/footer/Footer.jsx';
+import Footer from './components/footer/Footer.jsx';
 import Profile from './components/profile/ViewProfile.jsx';
 import Create from './components/posts/Create.jsx';
 import EditPost from './components/posts/EditPost.jsx';
@@ -40,15 +40,19 @@ const App = () => {
           {/* do we also want to have page that shows a list of users to click? or just ability to click on a user through their post */}
           {page === "ViewProfile" ? <Profile user={user} setContent={setContent}/> : ''}
         {/* post section */}
-          {page === "Create" ? <Create user={user} setPage={setPage}/> : ''}
+          {page === "Create" ? <Create user={user} setPage={setPage} setContentId={setContentId}/> : ''}
           {page === "ViewPost" ? <ViewPost contentId={contentId} setPage={setPage} setContentId={setContentId}/> : ''}
           {page === "EditPost" ? <EditPost contentId={contentId} setPage={setPage} setContentId={setContentId}/> : ''}
           
         {/* authentication section */}
           {/* {page === "login" ? <LogIn user={user} setUser={setUser}/> : ''} */}
           {/* {page === "signup" ? <SignUp setUser={setUser} /> : ''} */}
-          {/* <Footer /> */}
+          
       </div>
+      
+      <footer>
+      <Footer />
+      </footer>
       {/* <div>
           <button onClick={() => handleMode("light")}>Light Mode</button>
           <button onClick={() => handleMode("dark")}>Dark Mode</button>

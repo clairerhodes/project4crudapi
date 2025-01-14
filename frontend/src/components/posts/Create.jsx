@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Create = ({user, setPage}) => {  //probably need to pass user to the new post so that we can populate the body of the 
+const Create = ({user, setPage, setContentId}) => {  //probably need to pass user to the new post so that we can populate the body of the 
                         //request with the userId to track post owner
 
     const API_URL = 'http://3.90.140.106:8000/api/blogPost'
@@ -45,16 +45,22 @@ const Create = ({user, setPage}) => {  //probably need to pass user to the new p
             if (res.ok) {
                 let createdPost = await res.json(); 
                 console.log('Post successful:', createdPost);
-                setNewPost({ //clear the form after posting   
-                    subjectLine: '',
-                    companyName: '', 
-                    jobTitle: '', 
-                    status: '', 
-                    jobLink: '', 
-                    description: '',
-                    userID: user,
-                    comments: null,
-                });           
+
+                //We could clear the form and keep user on New post page. 
+                //But we decided sending them back home was prettier.
+                // setNewPost({ //clear the form after posting   
+                //     subjectLine: '',
+                //     companyName: '', 
+                //     jobTitle: '', 
+                //     status: '', 
+                //     jobLink: '', 
+                //     description: '',
+                //     userID: user,
+                //     comments: null,
+                // });
+                setContentId(createdPost.id);
+                setPage('ViewPost');
+
             } else { //handle if res is bad.
                 console.error('Failed to create post:', res.statusText);                
             }
