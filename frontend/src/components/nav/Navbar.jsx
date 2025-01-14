@@ -2,11 +2,11 @@
 const Navbar = ({handleSection}) => {
     return (
         <nav>
-            <button onClick={handleSection} value="home">Home</button>
-            <button onClick={handleSection} value="newPost">New Post</button>
-            <button onClick={handleSection} value="profile">My Profile</button>
-            <button onClick={handleSection} value="logout">Log Out</button>
+            <button onClick={handleSection} value="Home">Home</button>
+            <button onClick={handleSection} value="Create">New Post</button>
+            <button onClick={handleSection} value="ViewProfile">My Profile</button>
             {/* <button onClick={handleSection} value="logout">Log Out</button> */}
+            {/* <button onClick={handleSection} value="login">Log In</button> */}
         </nav>
     );
 };

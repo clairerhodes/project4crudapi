@@ -1,17 +1,23 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const Create = () => {  //probably need to pass user to the new post so that we can populate the body of the 
+const Create = ({user, setPage}) => {  //probably need to pass user to the new post so that we can populate the body of the 
                         //request with the userId to track post owner
 
-    const API_URL = `${import.meta.env.BASE_URL}`   
+    const API_URL = 'http://3.90.140.106:8000/api/blogPost'
+
+    // const thing = process.env.REACT_APP_BASE_URL;
+    // console.log(thing)
+       
 
     const [newPost, setNewPost] = useState({ //default state on page load
         subjectLine: '',
         companyName: '', 
         jobTitle: '', 
-        status: '', 
+        status: 1, 
         jobLink: '', 
         description: '',
+        userID: user,
+        comments: null,
     });
 
     const handleFormChange = (e) => { //Update to show what user types
@@ -26,7 +32,9 @@ const Create = () => {  //probably need to pass user to the new post so that we 
         e.preventDefault(); //Stops the submit button's native feature of refreshing the page.
 
         try {
-            let res = await fetch(API_URL, { //Update on Submit
+            console.log(newPost);
+            
+            let res = await fetch(API_URL, { //Post on Submit
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,6 +52,8 @@ const Create = () => {  //probably need to pass user to the new post so that we 
                     status: '', 
                     jobLink: '', 
                     description: '',
+                    userID: user,
+                    comments: null,
                 });           
             } else { //handle if res is bad.
                 console.error('Failed to create post:', res.statusText);                
@@ -55,13 +65,13 @@ const Create = () => {  //probably need to pass user to the new post so that we 
 
     return (
         <form onSubmit={handleSubmit}>
-            <h1>Update Post</h1>
+            <h1>Create Post</h1>
             <div>
                 <label>Subject:</label>
                 <input
                     type="text"
                     name="subjectLine"
-                    value={content.subjectLine}
+                    value={newPost.subjectLine}
                     onChange={handleFormChange}
                 />
             </div>
@@ -70,7 +80,7 @@ const Create = () => {  //probably need to pass user to the new post so that we 
                 <input
                     type="text"
                     name="companyName"
-                    value={content.companyName}
+                    value={newPost.companyName}
                     onChange={handleFormChange}
                 />
             </div>
@@ -79,7 +89,7 @@ const Create = () => {  //probably need to pass user to the new post so that we 
                 <input
                     type="text"
                     name="jobTitle"
-                    value={content.jobTitle}
+                    value={newPost.jobTitle}
                     onChange={handleFormChange}
                 />
             </div>
@@ -88,7 +98,7 @@ const Create = () => {  //probably need to pass user to the new post so that we 
                 <input
                     type="number"
                     name="status"
-                    value={content.status}
+                    value={newPost.status}
                     onChange={handleFormChange}
                 />
             </div>
@@ -97,7 +107,7 @@ const Create = () => {  //probably need to pass user to the new post so that we 
                 <input
                     type="text"
                     name="jobLink"
-                    value={content.jobLink}
+                    value={newPost.jobLink}
                     onChange={handleFormChange}
                 />
             </div>
@@ -106,7 +116,7 @@ const Create = () => {  //probably need to pass user to the new post so that we 
                 <input
                     type="text"
                     name="description"
-                    value={content.description}
+                    value={newPost.description}
                     onChange={handleFormChange}
                 />
             </div>

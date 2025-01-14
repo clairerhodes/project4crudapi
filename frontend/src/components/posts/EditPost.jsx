@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 
-const Update = ({contentId, setPage}) => {
+const EditPost = ({contentId, setPage}) => {
 
     const [content, setContent] = useState(null);
 
@@ -158,7 +158,7 @@ const Update = ({contentId, setPage}) => {
     );
 };
 
-export default Update;
+export default EditPost;
 
 
 
