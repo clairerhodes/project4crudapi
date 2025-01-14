@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import Home from './components/home/home.jsx'
+import Home from './components/home/Home.jsx'
 import Navbar from './components/nav/Navbar.jsx';
 // need to import authentication, 
 
