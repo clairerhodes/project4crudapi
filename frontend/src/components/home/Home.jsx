@@ -1,7 +1,7 @@
 // import Navbar from '../nav/Navbar.jsx';
 import { useEffect, useState} from 'react';
 
-const Home = ({content = [], setContent}) => {
+const Home = ({content = [], setContent, setContentId, setPage}) => {
 
     const BASE_URL = 'http://3.90.140.106:8000/api/blogPost'
 
@@ -24,6 +24,12 @@ const Home = ({content = [], setContent}) => {
         fetchContent();
     }, []);
 
+    
+    const handleShow = (id => {
+        setContentId(id) //grabs content 'id'
+        setPage('ViewPost')
+    })
+
     return (
         <>
             <div>
@@ -38,7 +44,7 @@ const Home = ({content = [], setContent}) => {
                     {content.map((post, index) => (
                         <div className="postContainer" key={index}>
                             <li>
-                                <h1>{post.subjectLine}</h1>
+                                <h1 onClick={ () => handleShow(post.id)}>{post.subjectLine}</h1>
                                 <h6>By {post.userID}</h6>
                                 <h2>{post.jobTitle} at {post.companyName}</h2>
                                 <h4>Job link: {post.jobLink}</h4>
