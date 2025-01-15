@@ -7,6 +7,14 @@ const ViewPost = ({contentId, setPage, setContentId}) => {
     console.log('this is the base url');    
     console.log(BASE_URL);
     
+    const handleEdit = (id => {
+        setContentId(id) //grabs content 'id'
+        setPage('EditPost')
+    })
+
+    const goHome = (e => {
+        setPage(e)
+    })
 
     const [post, setPost] = useState({
         subjectLine: "",
@@ -18,6 +26,15 @@ const ViewPost = ({contentId, setPage, setContentId}) => {
         userID: "",
         comments: [],
     });
+
+    const statusDescription = {
+        1: " Waiting for response",
+        2: "Interview scheduled",
+        3: "Follow up interview",
+        4: "Hired",
+        5: "Not hired"
+      };
+
 
     useEffect(() => {
         const getPostData = async () => {
@@ -33,24 +50,17 @@ const ViewPost = ({contentId, setPage, setContentId}) => {
         getPostData();
     }, []);
 
-    const handleEdit = (id => {
-        setContentId(id) //grabs content 'id'
-        setPage('EditPost')
-    })
-
-    const goHome = (e => {
-        setPage(e)
-    })
 
     return (
         <>
             <div>
                 <li>
                     <h1>{post.subjectLine}</h1>
-                    <h6>By {post.userID}</h6>
+                    <h4>By {post.userID}</h4>
                     <h2>{post.jobTitle} at {post.companyName}</h2>
                     <h4>Job link: {post.jobLink}</h4>
-                    <h4>Job status: {post.status}</h4>
+                    <h4>Job status: {statusDescription[post.status]}</h4>
+                    {/* <h4>Details:</h4> */}
                     <p>{post.description}</p>
                     <p>{post.comments}</p>
                 </li>
