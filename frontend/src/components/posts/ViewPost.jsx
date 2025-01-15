@@ -7,40 +7,6 @@ const ViewPost = ({contentId, setPage, setContentId}) => {
     console.log('this is the base url');    
     console.log(BASE_URL);
     
-    const statusDescription = {
-        1: " Waiting for response",
-        2: "Interview scheduled",
-        3: "Follow up interview",
-        4: "Hired",
-        5: "Not hired"
-      };
-
-    const [post, setPost] = useState({
-        subjectLine: "",
-        companyName: "",
-        jobTitle: "",
-        jobLink: "",
-        jobStatus: "",
-        description: "",
-        userID: "",
-        comments: [],
-    });
-
-    useEffect(() => {
-        const getPostData = async () => {
-            try {
-                // const res = await fetch(BASE_URL);
-                const res = await fetch(`${BASE_URL}/${contentId}`)
-                let JSONdata = await res.json();
-                console.log(JSONdata)
-                setPost(JSONdata);
-            } catch (err) {
-                console.log(err);
-            };
-        };
-        getPostData();
-    }, []);
-
     const handleEdit = (id => {
         setContentId(id) //grabs content 'id'
         setPage('EditPost')
@@ -50,15 +16,51 @@ const ViewPost = ({contentId, setPage, setContentId}) => {
         setPage(e)
     })
 
+    const [post, setPost] = useState({
+        subjectLine: "",
+        companyName: "",
+        jobTitle: "",
+        status: "",
+        jobLink: "",
+        description: "",
+        userID: "",
+        comments: [],
+    });
+
+    const statusDescription = {
+        1: " Waiting for response",
+        2: "Interview scheduled",
+        3: "Follow up interview",
+        4: "Hired",
+        5: "Not hired"
+      };
+
+
+    useEffect(() => {
+        const getPostData = async () => {
+            try {
+                // const res = await fetch(BASE_URL);
+                const res = await fetch(`${BASE_URL}/${contentId}`)
+                let JSONdata = await res.json();
+                setPost(JSONdata);
+            } catch (err) {
+                console.log(err);
+            };
+        };
+        getPostData();
+    }, []);
+
+
     return (
         <>
             <div>
                 <li>
                     <h1>{post.subjectLine}</h1>
-                    <h6>By {post.userID}</h6>
+                    <h4>By {post.userID}</h4>
                     <h2>{post.jobTitle} at {post.companyName}</h2>
                     <h4>Job link: {post.jobLink}</h4>
                     <h4>Job status: {statusDescription[post.status]}</h4>
+                    {/* <h4>Details:</h4> */}
                     <p>{post.description}</p>
                     <p>{post.comments}</p>
                 </li>
