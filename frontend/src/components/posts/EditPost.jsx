@@ -131,12 +131,13 @@ const EditPost = ({contentId, setPage, setContentId}) => {
             </div>
             <div>
                 <label>Status:</label>
-                <input
-                    type="number"
-                    name="status"
-                    value={content.status}
-                    onChange={handleFormChange}
-                />
+                <select name="status" value={content.status} onChange={handleFormChange}>
+                    <option value="1">Waiting for response</option>
+                    <option value="2">Interview scheduled</option>
+                    <option value="3">Follow up interview</option>
+                    <option value="4">Hired</option>
+                    <option value="5">Not hired</option>
+                </select>
             </div>
             <div>
                 <label>Job Link:</label>
