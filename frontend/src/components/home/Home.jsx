@@ -4,7 +4,7 @@ import { useEffect, useState} from 'react';
 
 const Home = ({content = [], setContent, setContentId, setPage}) => {
 
-    const BASE_URL = 'http://3.90.140.106:8000/api/blogPost'
+    const BASE_URL = 'http://127.0.0.1:8000/api/blogPost';
 
     const handleShow = (id => {
         setContentId(id) //grabs content 'id'
@@ -38,11 +38,7 @@ const Home = ({content = [], setContent, setContentId, setPage}) => {
         };
         fetchContent();
     }, []);
-
-    
-
-
-
+    console.log('Content:', content);
     return (
         <>
                 <div>

@@ -3,9 +3,9 @@ import React, { useState } from "react";
 const Create = ({user, setPage, setContentId}) => {  //probably need to pass user to the new post so that we can populate the body of the 
                         //request with the userId to track post owner
 
-    const API_URL = 'http://3.90.140.106:8000/api/blogPost'
+    const API_URL = 'http://127.0.0.1:8000/api/blogPost';
 
-    // const thing = process.env.REACT_APP_BASE_URL;
+    // const BASE_URL = 'http://127.0.0.1:8000/api/blogPost';
     // console.log(thing)
        
 
@@ -127,7 +127,7 @@ const Create = ({user, setPage, setContentId}) => {  //probably need to pass use
                     onChange={handleFormChange}
                 />
             </div>
-            <button type="submit">Create Post</button>
+            <button type="submit">Create Post</button>``
         </form>
     );
 };

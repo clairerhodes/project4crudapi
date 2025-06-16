@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import './EditPost.css';
 
 const EditPost = ({contentId, setPage, setContentId}) => {
 
@@ -8,14 +9,13 @@ const EditPost = ({contentId, setPage, setContentId}) => {
     //let API_URL =(`${BASE_URL}/${contentId}`) 
     // let API_URL = 'http://3.90.140.106:8000/api/blogPost/3'
     // let API_URL = `${import.meta.env.BASE_URL}/3`
-    const BASE_URL = 'http://3.90.140.106:8000/api/blogPost'
+    const BASE_URL = 'http://127.0.0.1:8000/api/blogPost';
     console.log('this is the base url');    
     console.log(BASE_URL);
 
 
     const userId = 1 //demonstration, not used currently
-    //In theory unnecessary since we will only be allowing users to get to this page if they own the post,
-    //but any old bad actor could maybe find a way around it?  IDK right now, doesn't matter.
+    //In theory unnecessary since we will only be allowing users to get to this page if they own the post.
 
     useEffect(() => { //Gets original post data
         const fetchContent = async () => {
@@ -99,69 +99,88 @@ const EditPost = ({contentId, setPage, setContentId}) => {
 
 
     return (
-                // add update and delete buttons
-        <form onSubmit={handleSubmit}>
-            <h1>Update Post</h1>
-            <div>
-                <label>Subject:</label>
-                <input
-                    type="text"
-                    name="subjectLine"
-                    value={content.subjectLine}
-                    onChange={handleFormChange}
-                />
-            </div>
-            <div>
-                <label>Company Name:</label>
-                <input
-                    type="text"
-                    name="companyName"
-                    value={content.companyName}
-                    onChange={handleFormChange}
-                />
-            </div>
-            <div>
-                <label>Job Title:</label>
-                <input
-                    type="text"
-                    name="jobTitle"
-                    value={content.jobTitle}
-                    onChange={handleFormChange}
-                />
-            </div>
-            <div>
-                <label>Status:</label>
-                <select name="status" value={content.status} onChange={handleFormChange}>
-                    <option value="1">Waiting for response</option>
-                    <option value="2">Interview scheduled</option>
-                    <option value="3">Follow up interview</option>
-                    <option value="4">Hired</option>
-                    <option value="5">Not hired</option>
-                </select>
-            </div>
-            <div>
-                <label>Job Link:</label>
-                <input
-                    type="text"
-                    name="jobLink"
-                    value={content.jobLink}
-                    onChange={handleFormChange}
-                />
-            </div>
-            <div>
-                <label>Description:</label>
-                <input
-                    type="text"
-                    name="description"
-                    value={content.description}
-                    onChange={handleFormChange}
-                />
-            </div>
-            <button type="submit">Update Post</button>
-            <button type="button" onClick={handleDelete}>Delete Post</button>
-        </form>
-
-    );
+    <form onSubmit={handleSubmit}>
+        <h1>Update Post</h1>
+        <div>
+            <label>Subject:</label>
+            <input
+                type="text"
+                name="subjectLine"
+                value={content.subjectLine}
+                onChange={handleFormChange}
+            />
+        </div>
+        <div>
+            <label>Company Name:</label>
+            <input
+                type="text"
+                name="companyName"
+                value={content.companyName}
+                onChange={handleFormChange}
+            />
+        </div>
+        <div>
+            <label>Job Title:</label>
+            <input
+                type="text"
+                name="jobTitle"
+                value={content.jobTitle}
+                onChange={handleFormChange}
+            />
+        </div>
+        <div>
+            <label>Status:</label>
+            <select
+                name="status"
+                value={content.status}
+                onChange={handleFormChange}
+            >
+                <option value="1">Waiting for response</option>
+                <option value="2">Interview scheduled</option>
+                <option value="3">Follow up interview</option>
+                <option value="4">Hired</option>
+                <option value="5">Not hired</option>
+            </select>
+        </div>
+        <div>
+            <label>Job Link:</label>
+            <input
+                type="text"
+                name="jobLink"
+                value={content.jobLink}
+                onChange={handleFormChange}
+            />
+        </div>
+        <div>
+            <label>Description:</label>
+            <input
+                type="text"
+                name="description"
+                value={content.description}
+                onChange={handleFormChange}
+            />
+        </div>
+        <div className="button-row">
+            <button type="submit">Update</button>
+            <button
+                type="button"
+                onClick={handleDelete}
+                className="delete-btn"
+            >
+                Delete
+            </button>
+            <button
+                type="button"
+                onClick={() => {
+                    setPage('ViewPost');
+                    setContentId(contentId);
+                }}
+            >
+                Go Back
+            </button>
+        </div>
+    </form>
+);
 };
 
 export default EditPost;
